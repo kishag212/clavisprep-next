@@ -213,7 +213,8 @@ export default function AppPage() {
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "28px", color: "var(--warm-white)", marginBottom: "12px" }}>Unlock your full college roadmap</h2>
             <p style={{ fontSize: "15px", color: "rgba(245,240,232,0.6)", marginBottom: "28px", maxWidth: "480px", margin: "0 auto 28px" }}>Get essay coaching, deadline tracking, financial aid estimates, and a personalized month-by-month action plan.</p>
             <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-              <a href="#" style={{ background: "var(--gold)", color: "var(--navy)", fontWeight: 600, fontSize: "16px", padding: "14px 32px", borderRadius: "var(--radius-md)", display: "inline-block" }}>Upgrade to Pro — $9.99/mo →</a>
+              <a href="#https://buy.stripe.com/8x228r9ihcQk8bQ75c83C01
+              " style={{ background: "var(--gold)", color: "var(--navy)", fontWeight: 600, fontSize: "16px", padding: "14px 32px", borderRadius: "var(--radius-md)", display: "inline-block" }}>Upgrade to Pro — $9.99/mo →</a>
               <a href="/" style={{ background: "transparent", color: "var(--gold-light)", fontWeight: 500, fontSize: "16px", padding: "13px 32px", borderRadius: "var(--radius-md)", border: "1px solid rgba(200,140,36,0.3)", display: "inline-block" }}>Back to Home</a>
             </div>
             <p style={{ fontSize: "12px", color: "rgba(245,240,232,0.3)", marginTop: "14px" }}>7-day free trial · Cancel anytime</p>
