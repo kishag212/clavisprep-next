@@ -1,23 +1,13 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@tailwind base;
-
 @custom-variant dark (&:is(.dark *));
-@tailwind components;
-@tailwind utilities;
 
 @font-face {
   font-family: 'Prachason Neue';
   src: url('/fonts/prachason-neue.ttf') format('truetype');
   font-weight: 400;
   font-display: swap;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 :root {
@@ -31,7 +21,6 @@
   --gold-bg:       #FBF5E8;
   --warm-white:    #F5F0E8;
   --off-white:     #EDE8DF;
-  --border: oklch(0.922 0 0);
   --border-dark:   rgba(200, 140, 36, 0.2);
   --text:          #0A1628;
   --text-2:        #4A4A4A;
@@ -39,10 +28,6 @@
   --text-on-dark:  #F5F0E8;
   --font-display:  'Prachason Neue', Georgia, serif;
   --font-body:     'DM Sans', system-ui, sans-serif;
-  --radius-sm:     6px;
-  --radius-md:     10px;
-  --radius-lg:     16px;
-  --radius-xl:     24px;
   --shadow-sm:     0 1px 3px rgba(10, 22, 40, 0.10);
   --shadow-md:     0 4px 20px rgba(10, 22, 40, 0.14);
   --shadow-gold:   0 4px 24px rgba(200, 140, 36, 0.30);
@@ -61,13 +46,9 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -101,7 +82,6 @@ img { max-width: 100%; display: block; }
 button { cursor: pointer; font-family: var(--font-body); }
 
 @theme inline {
-  --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -111,11 +91,6 @@ button { cursor: pointer; font-family: var(--font-body); }
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -138,9 +113,6 @@ button { cursor: pointer; font-family: var(--font-body); }
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 .dark {
@@ -162,11 +134,6 @@ button { cursor: pointer; font-family: var(--font-body); }
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
