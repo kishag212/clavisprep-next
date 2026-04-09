@@ -13,11 +13,11 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "ClavisPrep — The Key to Your College Future",
-  description: "AI-powered college prep. Get your personalized reach, match, and safety school list in 5 minutes.",
+  description: "Personalized college prep. Get your personalized reach, match, and safety school list in 5 minutes.",
   keywords: "college prep, AI college counselor, reach match safety, college application tracker",
   openGraph: {
     title: "ClavisPrep — The Key to Your College Future",
-    description: "AI-powered college prep. Get your personalized college list in 5 minutes.",
+    description: "Personalized college prep. Get your personalized college list in 5 minutes.",
     url: "https://clavisprep.com",
     siteName: "ClavisPrep",
     type: "website",

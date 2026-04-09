@@ -42,8 +42,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
 
-      {/* NAV */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 h-[68px] flex items-center justify-between px-8 border-b transition-all duration-300 ${scrolled ? "bg-[#0A1628]/95 backdrop-blur-md" : "bg-[#0A1628]"} border-[rgba(200,140,36,0.2)]`}>
+AI-Powered      <nav className={`fixed top-0 left-0 right-0 z-50 h-[68px] flex items-center justify-between px-8 border-b transition-all duration-300 ${scrolled ? "bg-[#0A1628]/95 backdrop-blur-md" : "bg-[#0A1628]"} border-[rgba(200,140,36,0.2)]`}>
         <a href="/" className="flex items-center gap-3">
           <Image src="/images/logo.png" alt="ClavisPrep" width={44} height={44} unoptimized className="rounded-lg" />
           <span className="font-display text-xl text-[#E7BF69] tracking-wide" style={{ fontFamily: "var(--font-display)" }}>ClavisPrep</span>
@@ -67,14 +66,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(200,140,36,0.08)_0%,transparent_70%)] pointer-events-none" />
         <div className="max-w-3xl mx-auto px-6 relative">
           <Badge className="mb-8 bg-[rgba(200,140,36,0.12)] text-[#C88C24] border border-[rgba(200,140,36,0.3)] hover:bg-[rgba(200,140,36,0.12)] text-xs tracking-widest uppercase px-4 py-1.5">
-            AI-Powered College Prep
+            Personalized College Prep
           </Badge>
           <h1 className="text-5xl md:text-7xl text-[#F5F0E8] leading-tight mb-6 font-normal" style={{ fontFamily: "var(--font-display)" }}>
             The key to your<br />
             <span className="text-[#E7BF69]">college future</span>
           </h1>
           <p className="text-lg md:text-xl text-[rgba(245,240,232,0.65)] max-w-lg mx-auto mb-10 leading-relaxed">
-            Answer 15 questions. Get your personalized list of reach, match, and safety schools — built by AI, tailored to you.
+            Answer 15 questions. Get your personalized list of reach, match, and safety schools — tailored for you.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
             <a href="/app">
@@ -110,7 +109,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <p className="text-xs font-medium tracking-widest uppercase text-[#C88C24] mb-3">Everything you need</p>
             <h2 className="text-4xl md:text-5xl text-[#0A1628] mb-4" style={{ fontFamily: "var(--font-display)" }}>Your complete college prep toolkit</h2>
-            <p className="text-lg text-[#4A4A4A] max-w-md mx-auto">Everything a private college counselor does — powered by AI, available to every student.</p>
+            <p className="text-lg text-[#4A4A4A] max-w-md mx-auto">Everything a private college counselor does — available to every student..</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURES.map(f => (
@@ -184,7 +183,7 @@ export default function Home() {
               </a>
             ))}
           </div>
-          <p className="text-xs text-[rgba(245,240,232,0.25)]">© 2026 ClavisPrep · The key to your college future · Powered by Claude AI</p>
+          <p className="text-xs text-[rgba(245,240,232,0.25)]">© 2026 ClavisPrep · The key to your college future · Powered by ClavisPrep</p>
         </div>
       </footer>
 

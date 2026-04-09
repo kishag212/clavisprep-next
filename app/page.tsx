@@ -78,7 +78,7 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(ellipse at 50% 0%, rgba(200,140,36,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: "820px", margin: "0 auto", padding: "0 24px", position: "relative" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(200,140,36,0.12)", border: "1px solid rgba(200,140,36,0.3)", borderRadius: "20px", padding: "6px 16px", marginBottom: "32px" }}>
-            <span style={{ color: "var(--gold)", fontSize: "12px", fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase" }}>AI-Powered College Prep</span>
+            <span style={{ color: "var(--gold)", fontSize: "12px", fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase" }}>Personalized College Prep</span>
           </div>
           <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 7vw, 72px)", color: "var(--warm-white)", lineHeight: 1.1, marginBottom: "24px", fontWeight: 400 }}>
             The key to your<br /><span style={{ color: "var(--gold-light)" }}>college future</span>
