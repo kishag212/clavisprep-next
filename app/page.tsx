@@ -62,7 +62,7 @@ export default function Home() {
               onMouseLeave={e => (e.currentTarget.style.color = "rgba(245,240,232,0.7)")}
             >{link}</a>
           ))}
-          <a href="/app.html" style={{
+          <a href="/app" style={{
             background: "var(--gold)", color: "var(--navy)", fontWeight: 600,
             fontSize: "14px", padding: "10px 22px", borderRadius: "var(--radius-md)",
             transition: "background 0.15s, box-shadow 0.15s",
@@ -87,7 +87,7 @@ export default function Home() {
             Answer 15 questions. Get your personalized list of reach, match, and safety schools — built by AI, tailored to you.
           </p>
           <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="/app.html" style={{ background: "var(--gold)", color: "var(--navy)", fontWeight: 600, fontSize: "16px", padding: "16px 36px", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-gold)", display: "inline-block", transition: "background 0.15s, transform 0.15s" }}
+            <a href="/app" style={{ background: "var(--gold)", color: "var(--navy)", fontWeight: 600, fontSize: "16px", padding: "16px 36px", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-gold)", display: "inline-block", transition: "background 0.15s, transform 0.15s" }}
               onMouseEnter={e => { e.currentTarget.style.background = "var(--gold-light)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
               onMouseLeave={e => { e.currentTarget.style.background = "var(--gold)"; e.currentTarget.style.transform = "translateY(0)"; }}
             >Build My College List — Free →</a>
@@ -167,7 +167,7 @@ export default function Home() {
             <Image src="/images/logo.png" alt="ClavisPrep" width={64} height={64} unoptimized style={{ margin: "0 auto 24px", borderRadius: "12px" }} />
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 5vw, 40px)", color: "var(--warm-white)", marginBottom: "16px", position: "relative" }}>Ready to find your perfect college?</h2>
             <p style={{ fontSize: "16px", color: "rgba(245,240,232,0.6)", marginBottom: "36px", position: "relative" }}>Join thousands of students who used ClavisPrep to build their college list, write better essays, and get accepted.</p>
-            <a href="/app.html" style={{ display: "inline-block", background: "var(--gold)", color: "var(--navy)", fontWeight: 600, fontSize: "16px", padding: "16px 40px", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-gold)", position: "relative", transition: "background 0.15s, transform 0.15s" }}
+            <a href="/app" style={{ display: "inline-block", background: "var(--gold)", color: "var(--navy)", fontWeight: 600, fontSize: "16px", padding: "16px 40px", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-gold)", position: "relative", transition: "background 0.15s, transform 0.15s" }}
               onMouseEnter={e => { e.currentTarget.style.background = "var(--gold-light)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
               onMouseLeave={e => { e.currentTarget.style.background = "var(--gold)"; e.currentTarget.style.transform = "translateY(0)"; }}
             >Start Free — No Credit Card →</a>
