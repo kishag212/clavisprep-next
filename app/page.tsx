@@ -45,14 +45,14 @@ export default function Home() {
         background: scrolled ? "rgba(10,22,40,0.98)" : "var(--navy)",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: "1px solid var(--border-dark)",
-        height: "68px",
+        height: "104px",
         display: "flex", alignItems: "center",
         padding: "0 32px",
         justifyContent: "space-between",
         transition: "background 0.3s",
       }}>
         <a href="/" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Image src="/images/logo.png" alt="ClavisPrep" width={60} height={60} unoptimized style={{ borderRadius: "8px" }} />
+          <Image src="/images/logo.png" alt="ClavisPrep" width={88} height={88} unoptimized style={{ borderRadius: "8px" }} />
           <span style={{ fontFamily: "var(--font-display)", fontSize: "20px", color: "var(--gold-light)", letterSpacing: "0.02em" }}>ClavisPrep</span>
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
