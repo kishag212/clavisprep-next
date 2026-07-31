@@ -52,7 +52,7 @@ export default function Home() {
         transition: "background 0.3s",
       }}>
         <a href="/" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Image src="/images/logo.png" alt="ClavisPrep" width={44} height={44} unoptimized style={{ borderRadius: "8px" }} />
+          <Image src="/images/logo.png" alt="ClavisPrep" width={60} height={60} unoptimized style={{ borderRadius: "8px" }} />
           <span style={{ fontFamily: "var(--font-display)", fontSize: "20px", color: "var(--gold-light)", letterSpacing: "0.02em" }}>ClavisPrep</span>
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
