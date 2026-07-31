@@ -18,7 +18,7 @@ const QUESTIONS: Question[] = [
     id: "grade",
     prompt: "What grade are you in?",
     helper: "This helps us time your roadmap correctly.",
-    options: ["Freshman", "Sophomore", "Junior", "Senior"],
+    options: ["8th Grade", "Freshman", "Sophomore", "Junior", "Senior"],
   },
   {
     id: "gpa",

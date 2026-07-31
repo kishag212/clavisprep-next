@@ -7,6 +7,12 @@ import { Button } from "@/components/ui/button";
 type QuizAnswers = Record<string, string>;
 
 const GRADE_ROADMAPS: Record<string, { title: string; desc: string }[]> = {
+  "8th Grade": [
+    { title: "Explore your interests", desc: "Try different subjects and activities — there's no wrong path yet." },
+    { title: "Build strong basics", desc: "Reading, writing, and math habits now make high school much easier." },
+    { title: "Learn about high school options", desc: "Look into course tracks, magnet programs, or electives available to you." },
+    { title: "Talk to your school counselor", desc: "Get a sense of what freshman year course selection will look like." },
+  ],
   Freshman: [
     { title: "Explore broadly", desc: "Join 2–3 clubs or activities to find what you actually enjoy." },
     { title: "Build study habits", desc: "Focus on grades now — freshman year GPA sets your baseline." },
@@ -47,6 +53,7 @@ export default function RoadmapPage() {
 
   const grade = answers.grade && GRADE_ROADMAPS[answers.grade] ? answers.grade : "Junior";
   const steps = GRADE_ROADMAPS[grade];
+  const headingPrefix = grade === "8th Grade" ? "Your 8th grade" : `Your ${grade} year`;
 
   return (
     <div className="min-h-screen">
@@ -69,7 +76,7 @@ export default function RoadmapPage() {
             Your personalized plan
           </Badge>
           <h1 className="text-4xl md:text-5xl text-[#F5F0E8] leading-tight mb-4 font-normal" style={{ fontFamily: "var(--font-display)" }}>
-            Your {grade} year <span className="text-[#E7BF69]">roadmap</span>
+            {headingPrefix} <span className="text-[#E7BF69]">roadmap</span>
           </h1>
           <p className="text-lg text-[rgba(245,240,232,0.65)] max-w-lg mx-auto">
             Based on your answers, here's what to focus on next to build the strongest possible application.
