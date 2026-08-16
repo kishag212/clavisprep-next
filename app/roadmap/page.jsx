@@ -856,7 +856,7 @@ export default function ActivityRoadmap() {
                 <div className="space-y-3">
                   {tasks.map((task) => (
                     <div
-                      key={taskIndex}
+                      key={task.originalIndex}
                       className={`flex items-start gap-3 p-4 rounded-lg border ${
                         task.completed
                           ? 'bg-green-50 border-green-200'
