@@ -1,6 +1,6 @@
 # Clavis Prep retention QA — September 7, 2026
 
-Release status: Atomic roadmap live stale-save gate PASSED. Authentication, persistence, and two-account UI isolation checks passed. Application remains undeployed per user instruction; deployed callback/progress smoke checks remain a post-release requirement. This is not a comprehensive security penetration test.
+Release status: DEPLOYED after explicit user authorization. Both live stale-save gates passed. Production Google sign-in returned to `/progress` and loaded the saved plan successfully. Authentication, persistence, and two-account UI isolation checks passed within the scope documented below. This is not a comprehensive security penetration test.
 
 ## Scope and evidence
 
@@ -169,3 +169,17 @@ Prepared the 19 retention files on `codex/retention-release-qa`, excluding unrel
 - Staged whitespace checks passed. Both live stale-save gates and exact cleanup are documented above.
 
 Package is ready for a local release commit. No push or deployment is authorized. Post-deployment callback/sign-in and progress smoke tests remain required before pilot invitations.
+
+## Authorized production release — September 7, 2026
+
+User subsequently authorized production deployment if ready. Released a clean Git export of commit `0828f96` from `codex/retention-release-qa` to the existing Vercel project `clavisprep-next`. Uncommitted marketing/SEO changes and local environment files were excluded. No Git remote was configured; this was a direct Vercel release, not a GitHub push.
+
+- New deployment: `dpl_EXpMToT9k4BrEDbfbxQ8wJw63nmq`, `https://clavisprep-next-81gbqg3ty-kishag212-9464s-projects.vercel.app`.
+- Previous production / rollback reference: `dpl_2AE68ZP336FNXHvq4bqc31aFi8FT`, `https://clavisprep-next-5214igps1-kishag212-9464s-projects.vercel.app`.
+- Vercel's default `npm run build` / Turbopack production build passed, including TypeScript and all 39 generated static pages. The local Turbopack stall did not reproduce in Vercel.
+- Built with production configuration and deferred domain promotion. Candidate `/progress` returned 200 with the expected page and noindex metadata; unauthenticated `/api/progress` returned 401. Vercel CLI generated a deployment-protection bypass token to perform the protected candidate check; no token value is stored in this report.
+- Promoted the verified deployment to production. Vercel reported success.
+- On `https://clavisprep.com`, `/`, `/progress`, `/organizer`, `/roadmap`, and `/login?next=/progress` returned 200. Unauthenticated `/api/progress` returned 401 with the sign-in message. An empty callback redirected to the recovery page; a synthetic root code request redirected to the callback with the safe local next path.
+- Browser verification: existing authenticated production plan loaded. A fresh Google sign-in from the production login page returned to `https://clavisprep.com/progress` and loaded the original saved grade, 45-minute budget, and roadmap-linked weekly steps.
+
+No student profile, task, or journal mutations were made during post-deployment verification. The user confirmed they have GitHub; repository URL is pending so this local release can be connected to the correct remote. The production release is complete independently of that GitHub setup.
