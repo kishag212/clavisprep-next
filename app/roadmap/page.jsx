@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
 import { createBrowserClient } from '@supabase/ssr';
 
 export default function ActivityRoadmap() {
@@ -8,6 +9,7 @@ export default function ActivityRoadmap() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [roadmapData, setRoadmapData] = useState(null); // array of month rows from DB
   const [userProfile, setUserProfile] = useState(null);
+  const [loadedOwnerId, setLoadedOwnerId] = useState(null);
   const [showProfileForm, setShowProfileForm] = useState(false);
   const [showRegenerateBanner, setShowRegenerateBanner] = useState(false);
   const [showStartPicker, setShowStartPicker] = useState(false);
@@ -153,6 +155,7 @@ export default function ActivityRoadmap() {
       window.location.replace('/login?next=/roadmap');
       return;
     }
+    setLoadedOwnerId(user.id);
 
     const { data: profile } = await supabase
       .from('user_profiles')
@@ -209,6 +212,11 @@ export default function ActivityRoadmap() {
       setLoading(false);
       return;
     }
+    if (user.id !== loadedOwnerId) {
+      setErrorMessage('Your account changed. Reload before saving this profile.');
+      setLoading(false);
+      return;
+    }
 
     const studentContext = {
       career_interests: formData.careerInterests,
@@ -230,10 +238,15 @@ export default function ActivityRoadmap() {
       captured_at: new Date().toISOString()
     };
 
-    const { data, error } = await supabase
-      .from('user_profiles')
-      .upsert({
-        user_id: user.id,
+    // Preserve the connected planner and reject edits from stale tabs.
+    const { data: currentProfile, error: readError } = await supabase.from('user_profiles').select('student_context,updated_at').eq('user_id', user.id).maybeSingle();
+    if (readError) { setErrorMessage('Your profile could not be loaded. Please try again.'); setLoading(false); return; }
+    if (!!currentProfile !== !!userProfile || (currentProfile?.updated_at ?? null) !== (userProfile?.updated_at ?? null)) {
+      setErrorMessage('Your profile changed in another tab. Reload before saving again. Your update was not saved.');
+      setLoading(false);
+      return;
+    }
+    const profileValues = {
         grade: formData.grade,
         current_school: formData.currentSchool,
         location: formData.location,
@@ -243,11 +256,16 @@ export default function ActivityRoadmap() {
         extracurriculars: formData.extracurriculars,
         max_commute_miles: formData.maxCommuteMiles ? parseInt(formData.maxCommuteMiles) : null,
         open_to_residential: formData.openToResidential,
-        student_context: studentContext,
+        student_context: { ...(currentProfile?.student_context || {}), ...studentContext },
         updated_at: new Date().toISOString()
-      }, { onConflict: 'user_id' })
-      .select()
-      .single();
+
+    };
+    let write;
+    if (currentProfile) {
+      write = supabase.from('user_profiles').update(profileValues).eq('user_id', user.id);
+      write = currentProfile.updated_at ? write.eq('updated_at', currentProfile.updated_at) : write.is('updated_at', null);
+    } else { write = supabase.from('user_profiles').insert({ user_id: user.id, ...profileValues }); }
+    const { data, error } = await write.select().single();
 
     if (error) {
       console.error('Save profile error:', error);
@@ -387,14 +405,23 @@ export default function ActivityRoadmap() {
   // --- Task completion ---
 
   async function saveTasks(monthRow, updatedTasks) {
-    setRoadmapData(prev => prev.map(m => m.id === monthRow.id ? { ...m, tasks: updatedTasks } : m));
-    const { error } = await supabase.from('roadmap_activities').update({ tasks: updatedTasks }).eq('id', monthRow.id);
-    if (error) {
-      setRoadmapData(prev => prev.map(m => m.id === monthRow.id ? monthRow : m));
-      setErrorMessage('That update could not be saved. Your previous progress was restored.');
+    try {
+      const { data, error } = await supabase.rpc('save_roadmap_tasks_if_current', {
+        p_month_id: String(monthRow.id),
+        p_owner_id: monthRow.user_id,
+        p_expected_tasks: monthRow.tasks,
+        p_tasks: updatedTasks,
+      });
+      if (error || data !== true) {
+        setErrorMessage(error ? 'That update could not be saved. Check your connection and sign-in, then try again.' : 'Your roadmap changed in another tab or account. Reload before saving again. Your update was not saved.');
+        return false;
+      }
+      setRoadmapData(prev => prev.map(m => m.id === monthRow.id ? { ...m, tasks: updatedTasks } : m));
+      return true;
+    } catch {
+      setErrorMessage('That update could not be saved. Check your connection and try again.');
       return false;
     }
-    return true;
   }
 
   async function toggleTaskComplete(monthRow, taskIndex) {
@@ -448,6 +475,7 @@ export default function ActivityRoadmap() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
         <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+          <Link href="/progress" className="inline-block text-blue-700 text-sm font-semibold mb-4">← My Next Steps</Link>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             {userProfile ? 'Edit Your Profile' : 'Create Your Profile'}
           </h1>
@@ -718,6 +746,7 @@ export default function ActivityRoadmap() {
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
           <div className="flex justify-between items-start mb-6">
             <div>
+              <Link href="/progress" className="inline-block text-blue-700 text-sm font-semibold mb-4">← My Next Steps</Link>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">
                 Your College Prep Roadmap
               </h1>

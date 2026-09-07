@@ -190,6 +190,13 @@ function DashboardContent() {
           <p className="text-lg text-slate-600">Let's continue your college prep journey</p>
         </div>
 
+        <Link href="/progress" className="mb-8 block rounded-2xl bg-[#173b3c] p-7 text-white hover:bg-[#24504d]">
+          <p className="text-xs uppercase tracking-widest text-[#e7cf95] mb-2">One useful step at a time</p>
+          <h2 className="font-serif text-2xl mb-2">My Next Steps</h2>
+          <p className="text-sm text-emerald-50 mb-3">Your weekly plan, journal, college comparisons, and family progress — saved together.</p>
+          <span className="font-semibold">Open this week’s plan →</span>
+        </Link>
+
         {/* Upgrade Banner for Free Users */}
         {!isPro && (
           <div className="mb-8 p-5 bg-gradient-to-r from-[#c88c24] to-[#91682b] rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
