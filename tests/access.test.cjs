@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Standalone CommonJS Node entry point. */
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');

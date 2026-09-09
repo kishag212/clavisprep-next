@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Standalone CommonJS Node entry point. */
 // Run with: node --env-file=.env.local scripts/grant-tester-access.cjs email [email ...]
 // Credentials stay local. Only app_metadata is updated; Stripe is never called.
 const { createClient } = require('@supabase/supabase-js');
