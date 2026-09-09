@@ -1,12 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { stripe } from '@/lib/stripe';
+import { getStripe } from '@/lib/stripe';
 import { createClient as createAdminClient } from '@supabase/supabase-js';
 
-const supabaseAdmin = createAdminClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
 // Test route (so browser doesn't 404)
 export async function GET() {
@@ -15,7 +11,17 @@ export async function GET() {
 
 // Real sync logic
 export async function POST() {
+  const stripe = getStripe();
+  if (!stripe || !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return NextResponse.json({ error: 'Payments are temporarily unavailable' }, { status: 503 });
+  }
+
   try {
+    const supabaseAdmin = createAdminClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     
@@ -43,12 +49,13 @@ export async function POST() {
       return NextResponse.json({ error: 'No active subscription' }, { status: 404 });
     }
 
-    const subscription = subscriptions.data[0] as any;
-    const periodStart = subscription.current_period_start;
-    const periodEnd = subscription.current_period_end;
-    const priceId = subscription.items?.data?.[0]?.price?.id;
+    const subscription = subscriptions.data[0];
+    const item = subscription.items.data[0];
+    const periodStart = item?.current_period_start;
+    const periodEnd = item?.current_period_end;
+    const priceId = item?.price.id;
 
-    if (!priceId) {
+    if (!priceId || periodStart == null || periodEnd == null) {
       return NextResponse.json({ error: 'No price found' }, { status: 500 });
     }
 
@@ -67,8 +74,8 @@ export async function POST() {
     );
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Sync error:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : 'Payment request failed' }, { status: 500 });
   }
 }

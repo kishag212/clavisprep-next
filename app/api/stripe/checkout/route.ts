@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { stripe } from '@/lib/stripe';
+import { getStripe } from '@/lib/stripe';
 
 export async function POST(request: Request) {
+  const stripe = getStripe();
+  if (!stripe || !process.env.STRIPE_PRICE_ID) {
+    return NextResponse.json({ error: 'Payments are temporarily unavailable' }, { status: 503 });
+  }
+
   try {
     const supabase = await createClient();
     
