@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { resolveAccess } from "@/lib/access";
 import { LogOut, User, Settings, BookOpen, Target, FileText, Sparkles, CreditCard, Map, Search, Calculator, ClipboardList, Lock, ArrowRight } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 
@@ -117,7 +118,8 @@ function DashboardContent() {
     }
   };
 
-  const isPro = subscription?.status === 'active' || subscription?.status === 'trialing';
+  const access = resolveAccess(subscription?.status, user?.app_metadata);
+  const isPro = access.isPro;
 
   if (loading) {
     return (
@@ -379,22 +381,25 @@ function DashboardContent() {
               {isPro ? (
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <p className="text-slate-600 font-bold">Pro Plan</p>
+                    <p className="text-slate-600 font-bold">{access.source === "tester" ? "Free tester access" : "Pro Plan"}</p>
                     <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded">Active</span>
                   </div>
-                  {subscription?.current_period_end && (
+                  {access.source === "tester" && access.expiresAt && (
+                    <p className="text-sm text-slate-600">Free through {new Date(access.expiresAt).toLocaleDateString()}. No card required. Tester access ends automatically without a charge.</p>
+                  )}
+                  {access.source === "paid" && subscription?.current_period_end && (
                     <p className="text-xs text-slate-500">
                       Renews {new Date(subscription.current_period_end).toLocaleDateString()}
                     </p>
                   )}
-                  <button
+                  {access.source === "paid" && <button
                     onClick={handleManageBilling}
                     disabled={managingBilling}
                     className="mt-3 flex items-center gap-2 text-sm text-[#c88c24] font-semibold hover:text-[#91682b]"
                   >
                     <CreditCard className="w-4 h-4" />
                     {managingBilling ? 'Loading...' : 'Manage Billing'}
-                  </button>
+                  </button>}
                 </div>
               ) : (
                 <div>

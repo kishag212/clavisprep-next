@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { resolveAccess } from "@/lib/access";
 import { createClient } from "@/utils/supabase/client";
 import { ArrowLeft, Sparkles, FileText, CheckCircle, AlertCircle } from "lucide-react";
 
@@ -40,7 +41,8 @@ export default function EssayCoach() {
     getUser();
   }, []);
 
-  const isPro = subscription?.status === 'active' || subscription?.status === 'trialing';
+  const access = resolveAccess(subscription?.status, user?.app_metadata);
+  const isPro = access.isPro;
 
   const analyzeEssay = () => {
     setAnalyzing(true);

@@ -1,5 +1,7 @@
 "use client";
 
+import { resolveAccess } from "@/lib/access";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, Check, Lock, Sparkles, MapPin, DollarSign, Users, GraduationCap, Crown } from "lucide-react";
@@ -184,7 +186,7 @@ export default function CollegeMatchQuiz() {
       setHasUser(Boolean(user));
       if (!user) return;
       const { data: subscription } = await supabase.from('subscriptions').select('status').eq('user_id', user.id).maybeSingle();
-      setIsPro(subscription?.status === 'active' || subscription?.status === 'trialing');
+      setIsPro(resolveAccess(subscription?.status, user.app_metadata).isPro);
     };
     checkAccess();
   }, []);

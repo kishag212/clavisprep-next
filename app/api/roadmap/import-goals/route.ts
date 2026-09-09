@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 
+import { resolveAccess } from "@/lib/access";
+
 type GoalActivity = {
   title?: string;
   description?: string;
@@ -22,7 +24,7 @@ export async function POST(request: NextRequest) {
   if (!user) return NextResponse.json({ error: "Please sign in first." }, { status: 401 });
 
   const { data: subscription } = await supabase.from("subscriptions").select("status").eq("user_id", user.id).maybeSingle();
-  if (!subscription || !["active", "trialing"].includes(subscription.status)) {
+  if (!resolveAccess(subscription?.status, user.app_metadata).isPro) {
     return NextResponse.json({ error: "A Pro subscription is required." }, { status: 403 });
   }
 
