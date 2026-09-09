@@ -132,7 +132,7 @@ export default function Login() {
               <Link href="/how-it-works" className="text-sm font-medium text-slate-600 hover:text-[#0a1628] transition-colors">How It Works</Link>
               <Link href="/pricing" className="text-sm font-medium text-slate-600 hover:text-[#0a1628] transition-colors">Pricing</Link>
               <Link href="/blog" className="text-sm font-medium text-slate-600 hover:text-[#0a1628] transition-colors">Blog</Link>
-              <Link href="/signup" className="px-5 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+              <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="px-5 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
                 Sign Up Free
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -148,7 +148,7 @@ export default function Login() {
                 <Link href="/how-it-works" className="text-sm font-medium text-slate-600 hover:text-[#0a1628] px-4 py-2">How It Works</Link>
                 <Link href="/pricing" className="text-sm font-medium text-slate-600 hover:text-[#0a1628] px-4 py-2">Pricing</Link>
                 <Link href="/blog" className="text-sm font-medium text-slate-600 hover:text-[#0a1628] px-4 py-2">Blog</Link>
-                <Link href="/signup" className="mx-4 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-lg text-center">Sign Up Free</Link>
+                <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="mx-4 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-lg text-center">Sign Up Free</Link>
               </div>
             </div>
           )}
@@ -272,7 +272,7 @@ export default function Login() {
             <div className="mt-6 text-center">
               <p className="text-sm text-slate-600">
                 Don't have an account?{" "}
-                <Link href="/signup" className="text-[#c88c24] font-semibold hover:text-[#91682b] transition-colors">
+                <Link href={`/signup?next=${encodeURIComponent(nextPath)}`} className="text-[#c88c24] font-semibold hover:text-[#91682b] transition-colors">
                   Sign up for free
                 </Link>
               </p>

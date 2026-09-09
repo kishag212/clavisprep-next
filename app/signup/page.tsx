@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { safeNext } from "@/lib/auth-next";
 import { useRouter } from "next/navigation";
 import { ArrowRight, ChevronDown, Eye, EyeOff, Mail, Lock, User, Check } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
@@ -105,6 +106,7 @@ export default function SignUp() {
     }
 
     setIsSubmitting(true);
+    const nextPath = safeNext(new URLSearchParams(window.location.search).get("next"));
     
     try {
       // Sign up the user with Supabase
@@ -112,6 +114,7 @@ export default function SignUp() {
         email: formData.email,
         password: formData.password,
         options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
           data: {
             full_name: formData.name,
           },
@@ -128,7 +131,7 @@ export default function SignUp() {
       alert("✅ Account Created!\n\nPlease check your email to verify your account.");
       
       // Redirect to login
-      router.push("/login");
+      router.push(`/login?next=${encodeURIComponent(nextPath)}`);
       
     } catch (error: any) {
       setErrors({ ...errors, general: error.message || "An error occurred" });
