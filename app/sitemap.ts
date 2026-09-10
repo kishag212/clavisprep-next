@@ -4,7 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Public routes only. Omit lastModified until reliable page dates are available.
   const routes = [
     "", "/about", "/features", "/how-it-works", "/pricing",
-    "/college-match", "/scholarships", "/essay-coach", "/calculator",
+    "/college-match", "/scholarships", "/calculator",
     "/colleges", "/resources", "/blog", "/contact",
   ];
 

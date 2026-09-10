@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://clavisprep.com"),
   title: "ClavisPrep – The Key to Your College Future",
   description:
     "AI-powered college prep platform to help students find schools, write better essays, and get accepted.",
